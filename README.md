@@ -1,4 +1,4 @@
-# Ephipany — Gstack Full-Stack Starter
+# Ephipany — Gstack Full-Stack Starter (Mobile)
 
 This repository includes a starter full-stack implementation for the Gstack workflow:
 
@@ -10,8 +10,8 @@ This repository includes a starter full-stack implementation for the Gstack work
 
 ## Stack
 
-- Backend: FastAPI (`backend/app/main.py`)
-- Frontend: static HTML console (`frontend/index.html`)
+- Backend API: FastAPI (`backend/app/main.py`)
+- Mobile app: React Native + Expo (`mobile/App.js`)
 
 ## Run backend
 
@@ -23,9 +23,17 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-## Run frontend
+## Run mobile app
 
-Open `frontend/index.html` in browser while API is running on port `8000`.
+```bash
+cd mobile
+npm install
+npm run start
+```
+
+Then open Expo Go on your iOS/Android device and scan the QR code.
+
+> On a physical device, set `API URL` inside the app to your machine's LAN IP, e.g. `http://192.168.1.10:8000`.
 
 ## First API steps
 
