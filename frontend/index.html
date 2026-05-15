@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ephipany Gstack Console</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 840px; margin: 2rem auto; padding: 0 1rem; }
+      .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+      input, button { padding: 0.5rem; margin-right: 0.5rem; }
+      button { cursor: pointer; }
+      pre { background: #f7f7f7; padding: 1rem; border-radius: 6px; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Ephipany Gstack Console</h1>
+    <div class="card">
+      <h3>Intervention Check</h3>
+      <input id="topic" value="medication" />
+      <input id="utterance" value="I will skip meds today" size="40" />
+      <input id="confidence" value="0.40" />
+      <button onclick="runCheck()">Run</button>
+    </div>
+
+    <pre id="out">Response will appear here.</pre>
+
+    <script>
+      const API = "http://localhost:8000";
+      async function runCheck() {
+        const topic = document.getElementById("topic").value;
+        const utterance = document.getElementById("utterance").value;
+        const confidence = Number(document.getElementById("confidence").value);
+        const res = await fetch(`${API}/intervene`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ topic, utterance, confidence }),
+        });
+        const json = await res.json();
+        document.getElementById("out").innerText = JSON.stringify(json, null, 2);
+      }
+    </script>
+  </body>
+</html>
